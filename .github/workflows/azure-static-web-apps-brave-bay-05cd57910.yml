@@ -22,11 +22,14 @@ jobs:
         id: check_token
         run: |
           if [ -z "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_BAY_05CD57910 }}" ]; then
-            echo "AZURE_STATIC_WEB_APPS_API_TOKEN is missing" && exit 1
+            echo "AZURE_STATIC_WEB_APPS_API_TOKEN is missing"
+            echo "::set-output name=skip_deploy::true"
+          else
+            echo "::set-output name=skip_deploy::false"
           fi
       - name: Build And Deploy
         id: builddeploy
-        if: success() # Ensures previous step succeeded
+        if: steps.check_token.outputs.skip_deploy == 'false'
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_BAY_05CD57910 }}
@@ -48,11 +51,14 @@ jobs:
         id: check_token
         run: |
           if [ -z "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_BAY_05CD57910 }}" ]; then
-            echo "AZURE_STATIC_WEB_APPS_API_TOKEN is missing" && exit 1
+            echo "AZURE_STATIC_WEB_APPS_API_TOKEN is missing"
+            echo "::set-output name=skip_deploy::true"
+          else
+            echo "::set-output name=skip_deploy::false"
           fi
       - name: Close Pull Request
         id: closepullrequest
-        if: success() # Ensures previous step succeeded
+        if: steps.check_token.outputs.skip_deploy == 'false'
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_BAY_05CD57910 }}
