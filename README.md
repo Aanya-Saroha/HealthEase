@@ -7,8 +7,7 @@ This is a web based application developed for health related english based websi
 
 ## Azure technologies used for Project
 
-1. Static web apps
-2. Health bot
+1. Health bot
 
 ## Features and Functionalities
 
