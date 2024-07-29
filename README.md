@@ -23,4 +23,4 @@ This is a web based application developed for health related english based websi
 2. CSS
 3. BOOTSTRAP
 
-## 🖥️ Developed by Aanya Saroha ,Astitva 🖥️
+## 🖥️ Developed by Aanya Saroha 🖥️
